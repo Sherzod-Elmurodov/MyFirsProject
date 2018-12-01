@@ -20,8 +20,13 @@ import android.widget.TextView;
 import com.eldor.hitorch.R;
 import com.eldor.hitorch.activity.HotelListActivity;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class HomeFragment extends Fragment implements TextView.OnEditorActionListener, View.OnClickListener {
 
+
+    private int type;
 
     private CardView cardView_hotel;
     private CardView cardView_things_to_do;
@@ -32,6 +37,7 @@ public class HomeFragment extends Fragment implements TextView.OnEditorActionLis
 
     private AutoCompleteTextView textView = null;
     private LinearLayoutManager layoutManager = null;
+    static List<String> myOptions;
 
     private ArrayAdapter<String> autocompletetexts = null;
 
@@ -49,6 +55,8 @@ public class HomeFragment extends Fragment implements TextView.OnEditorActionLis
         textView.setThreshold(1);
         textView.setAdapter(autocompletetexts);
         textView.setOnEditorActionListener(this);
+
+        myOptions = Arrays.asList((getResources().getStringArray(R.array.regions)));
 
         initButton(view);
 
@@ -98,6 +106,7 @@ public class HomeFragment extends Fragment implements TextView.OnEditorActionLis
             case R.id.cdv_hotel:
                 Intent intent = new Intent(getContext(), HotelListActivity.class);
                 startActivity(intent);
+
                 break;
             case R.id.cdv_things_to_do:
 
@@ -117,6 +126,7 @@ public class HomeFragment extends Fragment implements TextView.OnEditorActionLis
 
         }
     }
+
 
     @Override
     public void onAttach(Context context) {

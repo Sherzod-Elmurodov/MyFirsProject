@@ -58,10 +58,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/email"
             android:drawablePadding="20dp"
             android:drawableEnd="@drawable/ic_person"
             android:drawableRight="@drawable/ic_person"
-            android:hint="@string/email"
+            android:text="mr.muhammadsher@mail.ru"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -71,11 +72,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/pwd"
             android:inputType="textPassword"
             android:drawablePadding="20dp"
             android:drawableEnd="@drawable/ic_person"
             android:drawableRight="@drawable/ic_person"
-            android:hint="@string/pw"
+            android:text="admin12345"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

@@ -22,18 +22,19 @@
 
     <string-array name="regions">
         <item>Andijan</item>
+        <item>Bukhara</item>
         <item>Fergana</item>
-        <item>Namangan</item>
-        <item>Tashkent</item>
-        <item>Sirdarya</item>
         <item>Jizzakh</item>
-        <item>Samarkand</item>
+        <item>Khorezm</item>
+        <item>Namangan</item>
         <item>Navoi</item>
         <item>Kashkadarya</item>
+        <item>Syrdarya</item>
         <item>Surkhandarya</item>
-        <item>Bukhara</item>
-        <item>Kharezm</item>
-        <item>Karakalpakhistan</item>
+        <item>Tashkent region</item>
+        <item>Karakalpakistan</item>
+        <item>Tashkent</item>
+        <item>Samarkand</item>
     </string-array>
 
 </resources>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.eldor.hitorch">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,8 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.HotelListActivity"/>
-        <activity android:name=".activity.Hotel_previewActivity"/>
+        <activity android:name=".activity.HotelListActivity" />
+        <activity android:name=".activity.Hotel_previewActivity" />
+        <activity android:name=".activity.NewPlanActivity"></activity>
     </application>
 
 </manifest>
