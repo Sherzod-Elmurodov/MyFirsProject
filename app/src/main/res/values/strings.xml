@@ -18,6 +18,7 @@
     <string name="title">Title</string>
     <string name="content">Content</string>
     <string name="your_review">Your review</string>
+    <string name="trip_plan">Trip Plan</string>
 
     <string-array name="regions">
         <item>Andijan</item>

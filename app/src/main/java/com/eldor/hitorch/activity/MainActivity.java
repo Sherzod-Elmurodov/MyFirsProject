@@ -1,4 +1,4 @@
-package com.eldor.hitorch;
+package com.eldor.hitorch.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.eldor.hitorch.R;
 import com.eldor.hitorch.fragment.DashboardFragment;
 import com.eldor.hitorch.fragment.ReviewFragment;
 import com.eldor.hitorch.fragment.HomeFragment;
