@@ -43,35 +43,33 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/bg_white"
                         android:orientation="horizontal">
 
                         <RelativeLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1">
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_centerInParent="true"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
+                                <AutoCompleteTextView
+                                    android:id="@+id/find_place"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginRight="8dp"
-                                    android:src="@drawable/ic_search_black_24dp" />
+                                    android:drawableLeft="@drawable/ic_search_black_24dp"
+                                    android:maxLines="1"
+                                    android:maxLength="18"
+                                    android:gravity="center_horizontal"
+                                    android:imeOptions="actionGo"
+                                    android:inputType="textAutoComplete|textAutoCorrect"
+                                    android:hint="@string/where_to_go"
+                                    android:textColor="@color/black"
+                                    android:theme="@style/AutoCompleStyle"
+                                    android:background="@color/transparent"
+                                    android:focusableInTouchMode="true"
+                                    android:textColorHint="@color/gray3"
+                                    />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="Where to go?"
-                                    android:textColor="@color/gray2" />
-                            </LinearLayout>
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -132,8 +130,8 @@
 
 
                             <ImageView
-                                android:layout_width="90dp"
-                                android:layout_height="90dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:src="@drawable/bed"
                                 android:layout_gravity="center"
                                 android:layout_weight="1"/>
@@ -142,7 +140,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Hotel"
-                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:layout_gravity="center"/>
 
                         </LinearLayout>
@@ -169,7 +168,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/organize"
+                                android:src="@drawable/plan"
                                 android:layout_gravity="center"
                                 android:layout_weight="1"/>
 
@@ -177,7 +176,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Things to do"
-                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:layout_gravity="center"/>
 
                         </LinearLayout>
@@ -220,7 +220,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Rentals"
-                                android:textSize="25sp"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
                                 android:layout_gravity="center"/>
 
                         </LinearLayout>
@@ -254,7 +255,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Flight"
-                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:layout_gravity="center"/>
 
                         </LinearLayout>
@@ -297,7 +299,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Restaurant"
-                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:layout_gravity="center"/>
 
                         </LinearLayout>
@@ -331,7 +334,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Reviews"
-                                android:textSize="25sp"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
                                 android:layout_gravity="center"/>
 
                         </LinearLayout>
@@ -341,11 +345,9 @@
 
                 </LinearLayout>
 
-
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
-
 
     </android.support.design.widget.CoordinatorLayout>
 

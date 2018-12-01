@@ -14,4 +14,25 @@
     <string name="pw">******</string>
     <string name="sign">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="where_to_go">Where to go?</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="your_review">Your review</string>
+
+    <string-array name="regions">
+        <item>Andijan</item>
+        <item>Fergana</item>
+        <item>Namangan</item>
+        <item>Tashkent</item>
+        <item>Sirdarya</item>
+        <item>Jizzakh</item>
+        <item>Samarkand</item>
+        <item>Navoi</item>
+        <item>Kashkadarya</item>
+        <item>Surkhandarya</item>
+        <item>Bukhara</item>
+        <item>Kharezm</item>
+        <item>Karakalpakhistan</item>
+    </string-array>
+
 </resources>
