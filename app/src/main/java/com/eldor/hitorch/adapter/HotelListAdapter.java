@@ -75,7 +75,7 @@ public class HotelListAdapter extends RecyclerView.Adapter<HotelListAdapter.Hote
             hotel_name.setText(hotel.getTitle());
             //image.setImageResource(Integer.parseInt(hotel.getImage()));
             ratingBar.setRating(hotel.getRating_bar());
-            cost.setText(hotel.getCost());
+            cost.setText("$" + hotel.getCost());
             link.setText(hotel.getLink());
         }
 

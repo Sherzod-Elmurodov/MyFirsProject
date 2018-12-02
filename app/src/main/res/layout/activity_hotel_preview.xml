@@ -14,15 +14,17 @@
             android:layout_height="180dp"
             android:src="@drawable/background_gradient"
             />
+
         <TextView
+            android:id="@+id/h_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hotel Name -Street, City"
             android:layout_margin="10dp"
-            android:textStyle="bold"
+            android:text="Hotel name"
             android:textSize="20dp"
-            />
+            android:textStyle="bold" />
         <RatingBar
+            android:id="@+id/h_ratingbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"
@@ -88,6 +90,7 @@
                 android:textColor="@color/colorPrimary" />
 
             <TextView
+                android:id="@+id/h_txt_cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UZS 12 222 511"
@@ -118,5 +121,9 @@
             android:layout_margin="10dp"
             />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/feedback_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </ScrollView>

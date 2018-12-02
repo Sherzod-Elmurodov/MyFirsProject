@@ -42,31 +42,31 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
         if(plans!=null && !plans.isEmpty()){
             filldata(plans);
         }else{
-            plans = fakedata();
+            plans = Common.plans;
             filldata(plans);
         }
 
     }
 
-    private ArrayList<Plan> fakedata() {
-        ArrayList<Plan> plans = new ArrayList<>();
-        Plan plan = new Plan( "48", 6, "Registon trip", "1.1.1.1", "70");
-        plans.add(plan);
-        plan = new Plan( "75", 3, "Bibikhanum ", "1.1.1.1", "32");
-        plans.add(plan);
-        plan = new Plan( "30", 3, "Ulug`bek madrasasi", "1.1.1.1", "10");
-        plans.add(plan);
-        plan = new Plan( "50", 3, "Imom Buxoriy", "1.1.1.1", "20");
-        plans.add(plan);
-        plan = new Plan( "40", 11, "Samarkand Plov", "1.1.1.1", "10");
-        plans.add(plan);
-        plan = new Plan( "200", 2, "Samarkand Hotel", "1.1.1.1", "120");
-        plans.add(plan);
-        plan = new Plan( "200", 2, "Samarkand Motel", "1.1.1.1", "120");
-        plans.add(plan);
-        return plans;
-    }
-
+//    private ArrayList<Plan> fakedata() {
+//        ArrayList<Plan> plans = new ArrayList<>();
+//        Plan plan = new Plan( "48", 6, "Registon trip", "1.1.1.1", "70");
+//        plans.add(plan);
+//        plan = new Plan( "75", 3, "Bibikhanum ", "1.1.1.1", "32");
+//        plans.add(plan);
+//        plan = new Plan( "30", 3, "Ulug`bek madrasasi", "1.1.1.1", "10");
+//        plans.add(plan);
+//        plan = new Plan( "50", 3, "Imom Buxoriy", "1.1.1.1", "20");
+//        plans.add(plan);
+//        plan = new Plan( "40", 11, "Samarkand Plov", "1.1.1.1", "10");
+//        plans.add(plan);
+//        plan = new Plan( "200", 2, "Samarkand Hotel", "1.1.1.1", "120");
+//        plans.add(plan);
+//        plan = new Plan( "200", 2, "Samarkand Motel", "1.1.1.1", "120");
+//        plans.add(plan);
+//        return plans;
+//    }
+//
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,39 +76,46 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
 
         floatingActionButton = view.findViewById(R.id.add_plan_button);
         floatingActionButton.setOnClickListener(this);
+        if(!timelineRows.isEmpty()){
+            myAdapter = new TimelineViewAdapter(getContext(),0, timelineRows, true);
+            listView = view.findViewById(R.id.timeline_listview);
+            listView.setAdapter(myAdapter);
+            final AdapterView.OnItemClickListener adapter = new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    TimelineRow row = timelineRows.get(i);
+                    if(!row.getImage().sameAs(BitmapFactory.decodeResource(getResources(),R.drawable.confirm))){
+                        Toast.makeText(getContext(), row.getTitle(), Toast.LENGTH_SHORT).show();
+                    }
 
-        myAdapter = new TimelineViewAdapter(getContext(),0, timelineRows, true);
-        listView = view.findViewById(R.id.timeline_listview);
-        listView.setAdapter(myAdapter);
+                }
+            };
+
+            AdapterView.OnItemLongClickListener adapt= new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    TimelineRow row = timelineRows.get(i);
+                    if(!row.getImage().sameAs(BitmapFactory.decodeResource(getResources(),R.drawable.confirm))){
+                        row.setImage(BitmapFactory.decodeResource(getResources(), R.drawable.confirm));
+                        plans.get(i).setComplete(true);
+                        listView.setAdapter(myAdapter);
+                    }
+                    return false;
+                }
+            };
+
+            listView.setOnItemClickListener(adapter);
+            listView.setOnItemLongClickListener(adapt);
+        }else{
+            Intent intent = new Intent(getContext(), NewPlanActivity.class);
+            startActivity(intent);
+        }
+
+
         //listView.setOnScrollListener(this);
 
-        final AdapterView.OnItemClickListener adapter = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TimelineRow row = timelineRows.get(i);
-                if(!row.getImage().sameAs(BitmapFactory.decodeResource(getResources(),R.drawable.confirm))){
-                    Toast.makeText(getContext(), row.getTitle(), Toast.LENGTH_SHORT).show();
-                }
 
-            }
-        };
-
-        AdapterView.OnItemLongClickListener adapt= new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                TimelineRow row = timelineRows.get(i);
-                if(!row.getImage().sameAs(BitmapFactory.decodeResource(getResources(),R.drawable.confirm))){
-                    row.setImage(BitmapFactory.decodeResource(getResources(), R.drawable.confirm));
-                    plans.get(i).setComplete(true);
-                    listView.setAdapter(myAdapter);
-                }
-                return false;
-            }
-        };
-
-        listView.setOnItemClickListener(adapter);
-        listView.setOnItemLongClickListener(adapt);
         return view;
     }
 
@@ -119,9 +126,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
     }
 
     private void filldata(ArrayList<Plan> plans) {
-        for (int i=0; i<plans.size(); i++){
-            timelineRows.add(createTimeLine(plans.get(i),i));
+        for (int i = 0; i < plans.size(); i++) {
+            timelineRows.add(createTimeLine(plans.get(i), i));
         }
+
     }
 
     private TimelineRow createTimeLine(Plan plan, int i) {
@@ -148,6 +156,11 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
         return row;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
     private int checkImage(int type) {
 
         int test = getContext().getResources().getIdentifier(Common.types[type-1], "drawable", getContext().getPackageName());
@@ -164,8 +177,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
         Common.clearData(getContext());
         if(plans!=null && !plans.isEmpty()){
             Common.saveData(getContext(),plans);
-        }else{
-            Common.saveData(getContext(),fakedata());
         }
     }
+
 }

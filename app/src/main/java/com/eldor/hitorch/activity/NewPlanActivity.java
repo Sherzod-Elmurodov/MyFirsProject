@@ -3,6 +3,7 @@ package com.eldor.hitorch.activity;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,14 @@ import com.eldor.hitorch.data.Common;
 import com.eldor.hitorch.library.FlowTagLayout;
 import com.eldor.hitorch.library.OnTagSelectListener;
 import com.eldor.hitorch.model.NewPlan;
+import com.eldor.hitorch.model.Plan;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -125,13 +134,54 @@ public class NewPlanActivity extends AppCompatActivity implements View.OnClickLi
         int day = -1;
         int money_ = -1;
 
-        Toast.makeText(this, Common.destination.size()+" "+Common.trip_types.size(), Toast.LENGTH_SHORT).show();
         if(!days.getText().toString().equals(""))
             day = Integer.parseInt(days.getText().toString());
         if(!money.getText().toString().equals(""))
             money_ = Integer.parseInt(money.getText().toString());
         NewPlan plan = new NewPlan(Common.destination.toArray(new Integer[Common.destination.size()]),Common.trip_types.toArray(new Integer[Common.trip_types.size()]), day, money_);
         String gson = plan.convertToJson(plan);
-        Toast.makeText(this, gson, Toast.LENGTH_SHORT).show();
+        JsonParser parser = new JsonParser();
+        final JsonObject object = (JsonObject) parser.parse(gson);
+
+        Ion.with(getApplicationContext())
+                .load("POST", Common.BASE_URL+"createTripPlan")
+                .setJsonObjectBody(object)
+                .asJsonArray()
+                .setCallback(new FutureCallback<JsonArray>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonArray result) {
+                        Common.plans.clear();
+                        for(int i=0; i<result.size(); i++){
+                            JsonObject object1 = result.get(i).getAsJsonObject();
+                            Plan plan1 = new Plan(object1.get("time").getAsString(),
+                                    object1.get("type").getAsInt()-1,
+                                    object1.get("name").getAsString(),
+                                    object1.get("location").getAsString(),
+                                    object1.get("cost").getAsString());
+                            Common.plans.add(plan1);
+                        }
+                        Common.clearData(getBaseContext());
+                        finish();
+                    }
+                });
+//                .asJsonObject()
+//                .setCallback(new FutureCallback<JsonObject>() {
+//                    @Override
+//                    public void onCompleted(Exception e, JsonObject result) {
+//                        Common.plans.clear();
+//                        Log.i("Eldor", result.toString());
+//                        JsonArray array = result.getAsJsonArray();
+//                        for(int i=0; i<array.size(); i++){
+//                            JsonObject object1 = array.get(i).getAsJsonObject();
+//                            Plan plan1 = new Plan(object1.get("time").getAsString(),
+//                                    object1.get("type").getAsInt()-1,
+//                                    object1.get("name").getAsString(),
+//                                    object1.get("location").getAsString(),
+//                                    object1.get("cost").getAsString());
+//                            Common.plans.add(plan1);
+//                        }
+//                    }
+//                });
+
     }
 }

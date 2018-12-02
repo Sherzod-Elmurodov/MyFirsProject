@@ -4,8 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.eldor.hitorch.model.Hotels;
 import com.eldor.hitorch.model.Plan;
+import com.eldor.hitorch.model.Respond;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -15,10 +19,12 @@ import java.util.Set;
 public class Common {
 
     public static String[] types = {"restaurant","hotel", "museum", "tour", "shop","mosque","cultural performance","traditional village","ecotourism","festival","hiking","horse riding","atm","bank","embassy","tour agency","hospital"};
-    public static ArrayList<Plan> plans;
+    public static ArrayList<Plan> plans = new ArrayList<>();
+    public static String BASE_URL = "http://fizmasoft.uz/hitorch/API/";
     public static ArrayList<Integer> destination;
     public static ArrayList<Integer> trip_types;
-    public static String place;
+    public static ArrayList<Hotels> list = new ArrayList<>();
+    public static Hotels commonobject = null;
 
 
     public static void init(){

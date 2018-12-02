@@ -15,10 +15,20 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eldor.hitorch.R;
 import com.eldor.hitorch.activity.HotelListActivity;
+import com.eldor.hitorch.data.Common;
+import com.eldor.hitorch.model.Hotels;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +36,6 @@ import java.util.List;
 public class HomeFragment extends Fragment implements TextView.OnEditorActionListener, View.OnClickListener {
 
 
-    private int type;
 
     private CardView cardView_hotel;
     private CardView cardView_things_to_do;
@@ -38,6 +47,9 @@ public class HomeFragment extends Fragment implements TextView.OnEditorActionLis
     private AutoCompleteTextView textView = null;
     private LinearLayoutManager layoutManager = null;
     static List<String> myOptions;
+
+    private String region;
+    private int type;
 
     private ArrayAdapter<String> autocompletetexts = null;
 
@@ -104,8 +116,9 @@ public class HomeFragment extends Fragment implements TextView.OnEditorActionLis
         switch(view.getId()){
 
             case R.id.cdv_hotel:
-                Intent intent = new Intent(getContext(), HotelListActivity.class);
-                startActivity(intent);
+                region = textView.getText().toString();
+                type = 2;
+                sendserver();
 
                 break;
             case R.id.cdv_things_to_do:
@@ -124,6 +137,33 @@ public class HomeFragment extends Fragment implements TextView.OnEditorActionLis
 
                 break;
 
+        }
+    }
+
+    private void sendserver() {
+        if(!textView.getText().toString().equals("")){
+            Ion.with(getContext()).load("POST",Common.BASE_URL+"getPlaces")
+                    .setBodyParameter("type",String.valueOf(type))
+                    .setBodyParameter("region", String.valueOf(myOptions.indexOf(region)+1))
+                    .asJsonObject()
+                    .setCallback(new FutureCallback<JsonObject>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonObject result) {
+
+                            JsonArray array = result.get("respond").getAsJsonArray();
+                            Common.list.clear();
+                            for(int i=0; i<array.size(); i++){
+                                JsonObject object = array.get(i).getAsJsonObject();
+                                Hotels hotel = new Hotels(object.get("name").getAsString(),
+                                        "", object.get("totalRating").getAsFloat(),
+                                        object.get("cost").getAsString(),"www.uzbekistan.uz", object.get("feedback").getAsJsonArray());
+                                Common.list.add(hotel);
+                            }
+
+                            Intent intent = new Intent(getContext(), HotelListActivity.class);
+                            startActivity(intent);
+                        }
+                    });
         }
     }
 
