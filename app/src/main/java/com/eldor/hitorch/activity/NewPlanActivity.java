@@ -160,7 +160,7 @@ public class NewPlanActivity extends AppCompatActivity implements View.OnClickLi
                                     object1.get("cost").getAsString());
                             Common.plans.add(plan1);
                         }
-                        Common.clearData(getBaseContext());
+                        Common.clearData(NewPlanActivity.this);
                         finish();
                     }
                 });

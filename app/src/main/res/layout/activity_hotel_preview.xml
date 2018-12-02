@@ -12,7 +12,8 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:src="@drawable/background_gradient"
+            android:background="@drawable/background_gradient"
+            android:src="@drawable/background"
             />
 
         <TextView

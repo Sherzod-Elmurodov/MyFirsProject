@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class Common {
 
-    public static String[] types = {"restaurant","hotel", "museum", "tour", "shop","mosque","cultural performance","traditional village","ecotourism","festival","hiking","horse riding","atm","bank","embassy","tour agency","hospital"};
+    public static String[] types = {"restaurant","hotel", "museum", "tour", "mosque","shop","cultural performance","traditional village","ecotourism","festival","hiking","horse riding","atm","bank","embassy","tour agency","hospital"};
     public static ArrayList<Plan> plans = new ArrayList<>();
     public static String BASE_URL = "http://fizmasoft.uz/hitorch/API/";
     public static ArrayList<Integer> destination;
@@ -50,8 +50,10 @@ public class Common {
     }
 
     public static void clearData(Context context){
-        SharedPreferences prefs = context.getSharedPreferences("Objects",0);
-        prefs.edit().clear().apply();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("Objects");
+        editor.apply();
     }
 
 }
